@@ -10,6 +10,8 @@ struct mem
 	mem(unsigned char *);
 	unsigned int read(signed int);
 	void write(unsigned int, signed int);
+	void write_flush();
+	void read_flush();
 };
 
 # endif

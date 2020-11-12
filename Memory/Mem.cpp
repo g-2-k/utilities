@@ -36,6 +36,16 @@ unsigned int mem::read(signed int bln)
 	return dat;
 };
 
+void mem::read_flush()
+{
+	if(iBit == 8)
+	{
+		buffer = *ptr;
+		ptr++;
+		iBit = 0;
+	}
+}
+
 void mem::write(unsigned int dat, signed int bln)
 {
 	ptr--;
@@ -61,3 +71,14 @@ void mem::write(unsigned int dat, signed int bln)
 		}
 	}
 };
+
+void mem::write_flush()
+{
+	if(iBit)
+	{
+		*ptr = buffer;
+		buffer = 0;
+		iBit = 0;
+		ptr++;
+	}
+}
