@@ -1,6 +1,6 @@
 # include "Mem.h"
 
-mem::mem(unsigned char *tpt)
+mem::mem(unsigned char* tpt)
 {
 	ptr = tpt;
 	buffer = *ptr;
@@ -15,21 +15,21 @@ unsigned int mem::read(signed int bln)
 	buffer <<= iBit;
 	buffer >>= iBit;
 
-	while(bln > 0)
+	while (bln > 0)
 	{
-		if(iBit == 8) {
+		if (iBit == 8) {
 			buffer = *ptr;
 			ptr++;
 			iBit = 0;
 		}
-		bln -= (8-iBit);
-		if(bln > 0) {
+		bln -= (8 - iBit);
+		if (bln > 0) {
 			dat |= ((unsigned int)buffer << bln);
 			iBit = 8;
 		}
 		else {
-			dat |= ((unsigned int)buffer >> (-1*bln));
-			iBit = 8+bln;
+			dat |= ((unsigned int)buffer >> (-1 * bln));
+			iBit = 8 + bln;
 		}
 	}
 
@@ -38,7 +38,7 @@ unsigned int mem::read(signed int bln)
 
 void mem::read_flush()
 {
-	if(iBit == 8)
+	if (iBit == 8)
 	{
 		buffer = *ptr;
 		ptr++;
@@ -49,20 +49,20 @@ void mem::read_flush()
 void mem::write(unsigned int dat, signed int bln)
 {
 	ptr--;
-	while(bln > 0)
+	while (bln > 0)
 	{
-		bln -= (8-iBit);
-		if(bln > 0)
+		bln -= (8 - iBit);
+		if (bln > 0)
 		{
 			buffer |= (unsigned char)(dat >> bln);
 			iBit = 8;
 		}
 		else
 		{
-			buffer |= (unsigned char)(dat << (-1*bln));
-			iBit = 8+bln;
+			buffer |= (unsigned char)(dat << (-1 * bln));
+			iBit = 8 + bln;
 		}
-		if(iBit == 8)
+		if (iBit == 8)
 		{
 			*ptr = buffer;
 			ptr++;
@@ -74,7 +74,7 @@ void mem::write(unsigned int dat, signed int bln)
 
 void mem::write_flush()
 {
-	if(iBit)
+	if (iBit)
 	{
 		*ptr = buffer;
 		buffer = 0;
