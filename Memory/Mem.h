@@ -5,7 +5,7 @@ struct mem
 {
 	unsigned char *ptr;
 	unsigned char buffer;
-	unsigned int bst;
+	unsigned int iBit;
 
 	mem(unsigned char *);
 	unsigned int read(signed int);
